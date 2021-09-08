@@ -1,0 +1,72 @@
+import Golosinas.*
+
+describe "Test de Golosinas" {
+	
+	test "¿bombon cambia su peso?" {
+		bombon.recibeMordisco()
+		assert.equals(11, bombon.peso())
+	}
+	
+	test "¿alfajor cambia su peso?" {
+		alfajor.recibeMordisco()
+		assert.equals(240, alfajor.peso())
+	}
+	
+	test "¿caramelo cambia su peso?" {
+		caramelo.recibeMordisco()
+		assert.equals(4, caramelo.peso())
+	}
+	
+	test "¿chupetin cambia su peso si tiene menos de 2?" {
+		chupetin.peso(1.98)
+		chupetin.recibeMordisco()
+		assert.equals(1.98, chupetin.peso())
+	}
+	
+	test "¿cambia el peso de la oblea un 50%?" {
+		oblea.recibeMordisco()
+		assert.equals(125, oblea.peso())
+	}
+	
+	test "¿cambia el peso de la oblea en 25%?" {
+		oblea.recibeMordisco()
+		oblea.recibeMordisco()
+		oblea.recibeMordisco()
+		assert.equals(46.875, oblea.peso())
+	}
+	
+	test "¿El peso de chocolatin cambia?" {
+		chocolatin.peso(100)
+		assert.equals(100, chocolatin.peso())
+		chocolatin.recibeMordisco()
+		bombon.recibeMordisco()
+		assert.equals(11, bombon.peso())
+		assert.equals(98, chocolatin.peso())
+	}
+	
+	test "¿A chocolatin se le asigno un precio?" {
+		chocolatin.peso(100)
+		assert.equals(50, chocolatin.precio())
+	}
+	
+	test "¿El baño de golosina modifica su peso?" {
+		const pesoTest = oblea.peso() + 4
+		golosinaBaniada.peso()
+		assert.equals(pesoTest, golosinaBaniada.peso())
+	}
+	
+	test "Al morder el bañado, cambia su peso y el de la golosina" {
+		golosinaBaniada.recibeMordisco()
+		const pesoTest = 2 + oblea.peso()
+		assert.equals(pesoTest, golosinaBaniada.peso())
+	}
+	
+	test "¿La pastilla Tutti Frutti cambió de sabor?" {
+		pastillaTuttiFrutti.recibeMordisco()
+		assert.equals(chocolate, pastillaTuttiFrutti.sabor())
+		pastillaTuttiFrutti.recibeMordisco()
+		assert.equals(naranja, pastillaTuttiFrutti.sabor())
+		pastillaTuttiFrutti.recibeMordisco()
+		assert.equals(frutilla, pastillaTuttiFrutti.sabor())
+	}
+}

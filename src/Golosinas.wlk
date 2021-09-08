@@ -1,61 +1,77 @@
+import Mariano.*
+
 object bombon {
-	var precio = 5
-	var peso = 15
-	var sabor = "frutilla"
-	var gluten = false
+	var property precio = 5
+	var property peso = 15
+	var property sabor = frutilla
+	var property tieneGluten = false
+	
+	method sabor() {
+		return sabor
+	}
 	
 	method recibeMordisco() {
 		peso = (peso * 0.8) - 1
-		return console.println("El bombon ha recibido un mordisco")
 	}
 }
 
 object alfajor {
-	var precio = 12
-	var peso = 300
-	var sabor = "chocolate"
-	var gluten = true
+	var property precio = 12
+	var property peso = 300
+	var property sabor = chocolate
+	var property tieneGluten = true
+	
+	method sabor() {
+		return sabor
+	}
 	
 	method recibeMordisco() {
 		peso = (peso * 0.8)
-		return console.println("El alfajor ha recibido un mordisco")
 	}
 }
 
 
 object caramelo {
-	var precio = 1
-	var peso = 5
-	var sabor = "frutilla"
-	var gluten = false
+	var property precio = 1
+	var property peso = 5
+	var property sabor = frutilla
+	var property tieneGluten = false
+	
+	method sabor() {
+		return sabor
+	}
 	
 	method recibeMordisco() {
-		peso = peso--
-		return console.println("El caramelo ha recibido un mordisco")
+		peso = peso - 1
 	}
 }
 
 object chupetin {
-	var precio = 2
-	var peso = 7
-	var sabor = "naranja"
-	var gluten = false
+	var property precio = 2
+	var property peso = 7
+	var property sabor = naranja
+	var property tieneGluten = false
+	
+	method sabor() {
+		return sabor
+	}
 	
 	method recibeMordisco() {
 		if (peso > 2) {
 			peso = (peso * 0.9)
-		} else {
-			return console.println("El chupetin no perdió peso")
 		}
-		return console.println("El chupetin ha recibido un mordisco")
-	}
+	}	
 }
 
 object oblea {
-	var precio = 5
-	var peso = 250
-	var sabor = "vainilla"
-	var gluten = true
+	var property precio = 5
+	var property peso = 250
+	var property sabor = vainilla
+	var property tieneGluten = true
+	
+	method sabor() {
+		return sabor
+	}
 	
 	method recibeMordisco() {
 		if (peso > 70) {
@@ -63,72 +79,113 @@ object oblea {
 		} else {
 			peso = (peso * 0.75)
 		}
-		return console.println("La oblea ha recibido un mordisco")
-	}
-	
-	method peso() {
-		return peso
-	}
-	
-	method precio() {
-		return precio
-	}
-	
-	method sabor() {
-		return sabor
-	}
-	
-	method gluten() {
-		return gluten
 	}
 }
 
 object chocolatin {
 	var precio = 0
 	var peso = 0
-	var sabor = "chocolate"
-	var gluten = true
+	const sabor = chocolate
+	var property tieneGluten = true
 	
 	method recibeMordisco() {
 		peso = peso - 2
-		return console.println("El chocolatin ha recibido un mordisco")
+	}
+
+	method sabor() {
+		return sabor
+	}
+	
+	method peso() {
+		return peso
 	}
 	
 	method peso(gramos) {
 		peso = gramos
+		self.precio(gramos)
+	}
+	
+	method precio(gramos) {
 		precio = gramos * 0.50
+	}
+	
+	method precio() {
+		return precio
 	}
 }
 
 object golosinaBaniada {
-	var golosina = oblea
-	var precio = 2 + golosina.precio()
-	var peso = 4 + golosina.peso()
-	var sabor = golosina.sabor()
-	var gluten = golosina.gluten()
+	const golosina = oblea
+	var peso = 4
+	const cantMordisco = 0
 	
+	method precio() {
+		return 2 + golosina.precio()
+	}
+	
+	method peso() {
+		return golosina.peso() + peso
+	}
+	
+	method sabor() {
+		return golosina.sabor()
+	}
+	
+	method tieneGluten() {
+		return golosina.tieneGluten()
+	}
 	
 	method recibeMordisco() {
-		if (peso != 0) { peso = peso - 2 }
+		if (cantMordisco < 3) { 
+			peso = peso - 2
+		}
 		golosina.recibeMordisco()
-		console.println("El bañado de la golosina ha recibido un mordisco")
 	}
 }
 
 object pastillaTuttiFrutti {
-	var peso = 5
-	var gluten = null
-	var sabor = "frutilla"
+	var property peso = 5
+	var tieneGluten = false
+	var sabor = frutilla
 	
-	method gluten(valor) {
-		if (valor == true) { gluten = true} else { gluten = false }
+	method precio() {
+		if (self.tieneGluten()) { return 10 } else { return 7 }
+	}
+	
+	method tieneGluten() {
+		return tieneGluten
+	}
+	
+	method tieneGluten(valor) {
+		tieneGluten = valor
 	}
 	
 	method recibeMordisco() {
-		if (sabor == "frutilla") {sabor = "chocolate"}
-		else if (sabor == "chocolate") {sabor = "naranja"}
-		else if (sabor == "naranja") {sabor = "frutilla"}
-		console.println("La pastilla tutti frutti ha recibido un mordisco y ha cambiado su sabor")
+		sabor = sabor.quienSigue()
+	}
+	
+	method sabor() {
+		return sabor
 	}
 }
 
+object chocolate {
+	method quienSigue() {
+		return naranja
+	}
+}
+
+object frutilla {
+	method quienSigue() {
+		return chocolate
+	}
+}
+
+object naranja {
+	method quienSigue() {
+		return frutilla
+	}
+}
+
+object vainilla {
+}
