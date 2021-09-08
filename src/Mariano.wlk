@@ -1,71 +1,70 @@
 import Golosinas.*
 
 object mariano {
-	const bolsa = []
+	const bolsaGolosinas = []
 	const golosinasDesechas = []
 	
 	method comprar(unaGolosina) {
-		bolsa.add(unaGolosina)
+		bolsaGolosinas.add(unaGolosina)
 	}
 	
 	method desechar(unaGolosina) {
-		if (bolsa.contains(unaGolosina)) { bolsa.remove(unaGolosina)
+		if (bolsaGolosinas.contains(unaGolosina)) { bolsaGolosinas.remove(unaGolosina)
 			golosinasDesechas.add(unaGolosina)
 		}
 	}
 	
 	method cantidadDeGolosinas() {
-		return bolsa.size()
+		return bolsaGolosinas.size()
 	}
 	
 	method tieneLaGolosina(unaGolosina) {
-		return bolsa.contains(unaGolosina)
+		return bolsaGolosinas.contains(unaGolosina)
 	}
 	
 	method probarGolosinas() {
-		return bolsa.all({ golosina => golosina.recibeMordisco() not false })
+		bolsaGolosinas.forEach({ golosina => golosina.recibeMordisco() })
 	}
 	
 	method hayGolosinaSinTACC() {
-		return bolsa.any({ golosina => !(golosina.tieneGluten()) })
+		return bolsaGolosinas.any({ golosina => !(golosina.tieneGluten()) })
 	}
 	
 	method preciosCuidados() {
-		return bolsa.all({ golosina => golosina.precio() <= 10 })
+		return bolsaGolosinas.all({ golosina => golosina.precio() <= 10 })
 	}
 	
 	method golosinaDeSabor(unSabor) {
-		return bolsa.find({ golosina => golosina.sabor() == unSabor })
+		return bolsaGolosinas.find({ golosina => golosina.sabor().equals(unSabor) })
 	}
 	
 	method golosinasDeSabor(unSabor) {
-		return bolsa.filter({ golosina => golosina.sabor() == unSabor})
+		return bolsaGolosinas.filter({ golosina => golosina.sabor().equals(unSabor) })
 	}
 	
 	method sabores() {
-		const sabores = bolsa.map({ golosina => golosina.sabor()})
-		return sabores.asSet()
+		return bolsaGolosinas.map({ golosina => golosina.sabor() }).asSet()
 	}
 	
 	method golosinaMasCara() {
-		return bolsa.max({ golosina => golosina.precio() })
+		return bolsaGolosinas.max({ golosina => golosina.precio() })
 	}
 	
 	method pesoGolosinas() {
-		return bolsa.sum({ golosina => golosina.peso() })
+		return bolsaGolosinas.sum({ golosina => golosina.peso() })
 	}
 	
 	method golosinasFaltantes(golosinasDeseadas) {
-		return golosinasDeseadas.asSet().difference(bolsa.asSet())
+		return golosinasDeseadas.asSet().difference(bolsaGolosinas.asSet())
 	}
 	
 	method gustosFaltantes(gustosDeseados) {
-		const gustos = bolsa.map({ golosina => golosina.sabor() })
+		const gustos = bolsaGolosinas.map({ golosina => golosina.sabor() })
 		return gustosDeseados.asSet().difference(gustos.asSet())
 	}
 	
 	method gastoEn(sabor) {
-		const golosinasDeSabor = bolsa.filter({ golosina => golosina.sabor() == sabor})
+		const golosinasDeSabor = self.golosinasDeSabor(sabor)
 		return golosinasDeSabor.sum({ golosina => golosina.precio() })
 	}
 	
@@ -74,18 +73,18 @@ object mariano {
 	}
 	
 	method cantGolosinasDeSabor(sabor) {
-		return bolsa.count({ golosina => golosina.sabor() == sabor })
+		return bolsaGolosinas.count({ golosina => golosina.sabor() == sabor })
 	}
 	
 	method pesoTotalDelSabor(sabor) {
-		return bolsa.sum({ golosina => golosina.peso()})
+		return self.golosinasDeSabor(sabor).sum({ golosina => golosina.peso() })
 	}
 	
 	method saborMasPopular() {
-		return bolsa.max({ golosina => self.cantGolosinasDeSabor(golosina.sabor()) }).sabor()
+		return bolsaGolosinas.max({ golosina => self.cantGolosinasDeSabor(golosina.sabor()) }).sabor()
 	}
 	
 	method saborMasPesado() {
-		return bolsa.max({ golosina => self.pesoTotalDelSabor(golosina.sabor()) }).sabor()
+		return bolsaGolosinas.max({ golosina => self.pesoTotalDelSabor(golosina.sabor()) }).sabor()
 	}
 }

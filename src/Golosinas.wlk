@@ -188,4 +188,7 @@ object naranja {
 }
 
 object vainilla {
+	method quienSigue() {
+		return self
+	}
 }
