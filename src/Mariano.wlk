@@ -46,6 +46,10 @@ object mariano {
 		return bolsaGolosinas.map({ golosina => golosina.sabor() }).asSet()
 	}
 	
+	method baniar(unaGolosina) {
+		self.comprar(new GolosinaBaniada(golosina = unaGolosina))
+	}
+	
 	method golosinaMasCara() {
 		return bolsaGolosinas.max({ golosina => golosina.precio() })
 	}

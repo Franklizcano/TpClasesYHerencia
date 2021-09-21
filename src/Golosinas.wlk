@@ -1,6 +1,6 @@
 import Mariano.*
 
-object bombon {
+class Bombon{
 	var property precio = 5
 	var property peso = 15
 	var property sabor = frutilla
@@ -15,7 +15,7 @@ object bombon {
 	}
 }
 
-object alfajor {
+class Alfajor {
 	var property precio = 12
 	var property peso = 300
 	var property sabor = chocolate
@@ -31,7 +31,7 @@ object alfajor {
 }
 
 
-object caramelo {
+class Caramelo {
 	var property precio = 1
 	var property peso = 5
 	var property sabor = frutilla
@@ -46,7 +46,7 @@ object caramelo {
 	}
 }
 
-object chupetin {
+class Chupetin {
 	var property precio = 2
 	var property peso = 7
 	var property sabor = naranja
@@ -63,7 +63,7 @@ object chupetin {
 	}	
 }
 
-object oblea {
+class Oblea {
 	var property precio = 5
 	var property peso = 250
 	var property sabor = vainilla
@@ -82,7 +82,7 @@ object oblea {
 	}
 }
 
-object chocolatin {
+class Chocolatin {
 	var precio = 0
 	var peso = 0
 	const sabor = chocolate
@@ -114,8 +114,8 @@ object chocolatin {
 	}
 }
 
-object golosinaBaniada {
-	const golosina = oblea
+class GolosinaBaniada {
+	var golosina
 	var peso = 4
 	const cantMordisco = 0
 	
@@ -143,10 +143,10 @@ object golosinaBaniada {
 	}
 }
 
-object pastillaTuttiFrutti {
+class PastillaTuttiFrutti {
 	var property peso = 5
 	var tieneGluten = false
-	var sabor = frutilla
+	var sabor = frutilla	
 	
 	method precio() {
 		if (self.tieneGluten()) { return 10 } else { return 7 }

@@ -4,24 +4,30 @@ import Golosinas.*
 describe "Test de Mariano" {
 	
 	test "Mariano puede comprar una golosina" {
+		const alfajor = new Alfajor()
         mariano.comprar(alfajor)
 		assert.that(mariano.tieneLaGolosina(alfajor))
 	}
 	
 	test "Mariano desecho una golosina" {
+		const alfajor = new Alfajor()
 		mariano.comprar(alfajor)
 		mariano.desechar(alfajor)
 		assert.that(mariano.comproYDesecho(alfajor))
 	}
 	
 	test "Mariano comprueba si tiene golosinas sin TACC" {
+		const oblea = new Oblea()
 		mariano.comprar(oblea)
 		assert.notThat(mariano.hayGolosinaSinTACC())
+		const chupetin = new Chupetin()
 		mariano.comprar(chupetin)
 		assert.that(mariano.hayGolosinaSinTACC())
 	}
 	
 	test "Mariano puede probar varias golosinas" {
+		const oblea = new Oblea()
+		const chupetin = new Chupetin()		
 		mariano.comprar(oblea)
 		mariano.comprar(chupetin)
 		mariano.probarGolosinas()
@@ -30,26 +36,35 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba si compro golosinas a precios cuidados" {
+		const chupetin = new Chupetin()
 		mariano.comprar(chupetin)
 		assert.that(mariano.preciosCuidados())
+		const alfajor = new Alfajor()
 		mariano.comprar(alfajor)
 		assert.notThat(mariano.preciosCuidados())
 	}
 	
 	test "Mariano comprueba si tiene golosinas de un sabor" {
+		const chupetin = new Chupetin()
 		mariano.comprar(chupetin)
 		assert.equals(chupetin, mariano.golosinaDeSabor(naranja))
+		const alfajor = new Alfajor()
 		mariano.comprar(alfajor)
 		assert.equals(alfajor, mariano.golosinaDeSabor(chocolate))
 	}
 	
 	test "Mariano comprueba las golosinas que tiene de un sabor" {
+		const alfajor = new Alfajor()
 		mariano.comprar(alfajor)
+		const chocolatin = new Chocolatin()
 		mariano.comprar(chocolatin)
 		assert.equals([alfajor, chocolatin], mariano.golosinasDeSabor(chocolate))
 	}
 	
 	test "Mariano comprueba los sabores de las golosinas que compró" {
+		const alfajor = new Alfajor()
+		const chupetin = new Chupetin()
+		const chocolatin = new Chocolatin()
 		mariano.comprar(alfajor)
 		mariano.comprar(chupetin)
 		mariano.comprar(chocolatin)
@@ -57,6 +72,10 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba cual es la golosina más cara de su bolsa" {
+		const alfajor = new Alfajor()
+		const chupetin = new Chupetin()
+		const chocolatin = new Chocolatin()
+		const oblea = new Oblea()
 		mariano.comprar(alfajor)
 		mariano.comprar(chupetin)
 		mariano.comprar(chocolatin)
@@ -65,6 +84,9 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba el peso de su bolsa" {
+		const alfajor = new Alfajor()
+		const chupetin = new Chupetin()
+		const oblea = new Oblea()
 		mariano.comprar(alfajor)
 		mariano.comprar(chupetin)
 		mariano.comprar(oblea)
@@ -72,18 +94,26 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba cuales golosinas deseadas le falta por comprar" {
+		const alfajor = new Alfajor()
+		const chupetin = new Chupetin()
+		const oblea = new Oblea()
 		mariano.comprar(alfajor)
 		mariano.comprar(chupetin)
 		assert.equals(#{oblea}, mariano.golosinasFaltantes([alfajor, chupetin, oblea]))
 	}
 	
 	test "Mariano comprueba que sabores le falta comprar" {
+		const caramelo = new Caramelo()
+		const oblea = new Oblea()
 		mariano.comprar(oblea)
 		mariano.comprar(caramelo)
 		assert.equals(#{chocolate, naranja}, mariano.gustosFaltantes([frutilla, chocolate, naranja, vainilla]))
 	}
 	
 	test "Mariano comprueba cuanto gastó en golosinas de un sabor" {
+		const bombon = new Bombon()
+		const pastillaTuttiFrutti = new PastillaTuttiFrutti()
+		const oblea = new Oblea()
 		mariano.comprar(bombon)
 		mariano.comprar(oblea)
 		mariano.comprar(pastillaTuttiFrutti)
@@ -91,6 +121,9 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba si desecho golosinas" {
+		const bombon = new Bombon()
+		const pastillaTuttiFrutti = new PastillaTuttiFrutti()
+		const oblea = new Oblea()
 		mariano.comprar(bombon)
 		mariano.comprar(oblea)
 		mariano.comprar(pastillaTuttiFrutti)
@@ -101,6 +134,9 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba cual es el sabor más popular de su bolsa" {
+		const bombon = new Bombon()
+		const pastillaTuttiFrutti = new PastillaTuttiFrutti()
+		const oblea = new Oblea()
 		mariano.comprar(bombon)
 		mariano.comprar(oblea)
 		mariano.comprar(pastillaTuttiFrutti)
@@ -108,9 +144,20 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba cuales golosinas de un sabor son las mas pesadas" {
+		const alfajor = new Alfajor()
+		const bombon = new Bombon()
+		const oblea = new Oblea()
 		mariano.comprar(bombon)
 		mariano.comprar(oblea)
 		mariano.comprar(alfajor)
 		assert.equals(chocolate, mariano.saborMasPesado())
+	}
+	
+	test "Mariano puede bañar una golosina" {
+		const alfajor = new Alfajor()
+		const jorgitoBaniado = new GolosinaBaniada(golosina = alfajor)
+		mariano.comprar(jorgitoBaniado)
+		assert.that(mariano.tieneLaGolosina(jorgitoBaniado))
+		assert.equals(304, jorgitoBaniado.peso())
 	}
 }
