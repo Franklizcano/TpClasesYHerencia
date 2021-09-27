@@ -103,7 +103,7 @@ describe "Test de Mariano" {
 	}
 	
 	test "Mariano comprueba que sabores le falta comprar" {
-		const caramelo = new Caramelo()
+		const caramelo = new Caramelo(sabor = chocolate)
 		const oblea = new Oblea()
 		mariano.comprar(oblea)
 		mariano.comprar(caramelo)

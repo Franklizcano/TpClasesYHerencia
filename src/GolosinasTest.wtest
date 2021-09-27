@@ -15,7 +15,7 @@ describe "Test de Golosinas" {
 	}
 	
 	test "¿caramelo cambia su peso?" {
-		const caramelo = new Caramelo()
+		const caramelo = new Caramelo(sabor = frutilla)
 		caramelo.recibeMordisco()
 		assert.equals(4, caramelo.peso())
 	}
@@ -82,5 +82,51 @@ describe "Test de Golosinas" {
 		assert.equals(naranja, pastillaTuttiFrutti.sabor())
 		pastillaTuttiFrutti.recibeMordisco()
 		assert.equals(frutilla, pastillaTuttiFrutti.sabor())
+	}
+	
+	test "El caramelo puede tener varios sabores" {
+		const carameloFrutilla = new Caramelo(sabor = frutilla)
+		assert.equals(frutilla, carameloFrutilla.sabor())
+		const carameloNaranja = new Caramelo(sabor = naranja)
+		assert.equals(naranja, carameloNaranja.sabor())
+		const carameloChocolate = new Caramelo(sabor = chocolate)
+		assert.equals(chocolate, carameloChocolate.sabor())
+	}
+	
+	test "Puede haber bombones duros que se comporten distinto" {
+		var bombon = new Bombon() 
+		bombon.recibeMordisco() 
+		assert.equals(11, bombon.peso()) 
+		bombon = new BombonDuro() 
+		bombon.recibeMordisco() 
+		assert.equals(13.5, bombon.peso()) 
+	}
+	
+	test "El caramelo relleno al ser mordido su sabor cambia a chocolate" {
+		var caramelo = new Caramelo(sabor = frutilla) 
+		caramelo.recibeMordisco()
+		assert.equals(4, caramelo.peso())
+		assert.equals(frutilla, caramelo.sabor())
+		caramelo = new CarameloRelleno(sabor = naranja) 
+		caramelo.recibeMordisco() 
+		assert.equals(4, caramelo.peso())
+		assert.equals(chocolate, caramelo.sabor())
+	}
+	
+	test "La oblea crujiente en sus primeros 3 mordiscos pierde 5 gramos de peso adicional" {
+		var oblea = new Oblea() 
+		oblea.recibeMordisco()
+		oblea.recibeMordisco()
+		oblea.recibeMordisco() 
+		assert.equals(46.875, oblea.peso())
+		oblea.recibeMordisco()
+		assert.equals((46.875 * 0.75), oblea.peso())
+		oblea = new ObleaCrujiente() 
+		oblea.recibeMordisco()
+		oblea.recibeMordisco()
+		oblea.recibeMordisco()
+		assert.equals(43.5, oblea.peso())
+		oblea.recibeMordisco()
+		assert.equals((43.5 * 0.7), oblea.peso())
 	}
 }

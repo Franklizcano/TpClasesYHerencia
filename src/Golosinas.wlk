@@ -1,6 +1,6 @@
 import Mariano.*
 
-class Bombon{
+class Bombon {
 	var property precio = 5
 	var property peso = 15
 	var property sabor = frutilla
@@ -12,6 +12,21 @@ class Bombon{
 	
 	method recibeMordisco() {
 		peso = (peso * 0.8) - 1
+	}
+}
+
+class BombonDuro {
+	var property precio = 5
+	var property peso = 15
+	var property sabor = frutilla
+	var property tieneGluten = false
+	
+	method sabor() {
+		return sabor
+	}
+	
+	method recibeMordisco() {
+		peso = peso - (peso * 0.1)
 	}
 }
 
@@ -34,7 +49,7 @@ class Alfajor {
 class Caramelo {
 	var property precio = 1
 	var property peso = 5
-	var property sabor = frutilla
+	var property sabor
 	var property tieneGluten = false
 	
 	method sabor() {
@@ -43,6 +58,22 @@ class Caramelo {
 	
 	method recibeMordisco() {
 		peso = peso - 1
+	}
+}
+
+class CarameloRelleno {
+	var property precio = 1
+	var property peso = 5
+	var property sabor
+	var property tieneGluten = false
+	
+	method sabor() {
+		return sabor
+	}
+	
+	method recibeMordisco() {
+		peso = peso - 1
+		sabor = chocolate
 	}
 }
 
@@ -82,9 +113,33 @@ class Oblea {
 	}
 }
 
+class ObleaCrujiente {
+	var property precio = 5
+	var property peso = 250
+	var property sabor = vainilla
+	var property tieneGluten = true
+	var mordiscos = 0
+	
+	method sabor() {
+		return sabor
+	}
+	
+	method recibeMordisco() {
+		if (peso > 70 and mordiscos < 3) {
+			peso = (peso * 0.5) - 3
+			mordiscos++
+		} else if (mordiscos == 3) {
+			peso = (peso * 0.75) - 3
+			mordiscos++
+		} else {
+			peso = (peso * 0.75)
+		}
+	}
+}
+
 class Chocolatin {
-	var precio = 0
-	var peso = 0
+	var peso
+	const precio = peso * 0.50
 	const sabor = chocolate
 	var property tieneGluten = true
 	
@@ -100,13 +155,27 @@ class Chocolatin {
 		return peso
 	}
 	
-	method peso(gramos) {
-		peso = gramos
-		self.precio(gramos)
+	method precio() {
+		return precio
+	}
+}
+
+class ChocolatinVIP {
+	var peso
+	const precio = peso * 0.50
+	const sabor = chocolate
+	var property tieneGluten = true
+	
+	method recibeMordisco() {
+		peso = peso - 2
+	}
+
+	method sabor() {
+		return sabor
 	}
 	
-	method precio(gramos) {
-		precio = gramos * 0.50
+	method peso() {
+		return peso
 	}
 	
 	method precio() {
