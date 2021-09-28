@@ -15,17 +15,8 @@ class Bombon {
 	}
 }
 
-class BombonDuro {
-	var property precio = 5
-	var property peso = 15
-	var property sabor = frutilla
-	var property tieneGluten = false
-	
-	method sabor() {
-		return sabor
-	}
-	
-	method recibeMordisco() {
+class BombonDuro inherits Bombon {
+	override method recibeMordisco() {
 		peso = peso - (peso * 0.1)
 	}
 }
@@ -61,18 +52,9 @@ class Caramelo {
 	}
 }
 
-class CarameloRelleno {
-	var property precio = 1
-	var property peso = 5
-	var property sabor
-	var property tieneGluten = false
-	
-	method sabor() {
-		return sabor
-	}
-	
-	method recibeMordisco() {
-		peso = peso - 1
+class CarameloRelleno inherits Caramelo {
+	override method recibeMordisco() {
+		super()
 		sabor = chocolate
 	}
 }
@@ -113,18 +95,10 @@ class Oblea {
 	}
 }
 
-class ObleaCrujiente {
-	var property precio = 5
-	var property peso = 250
-	var property sabor = vainilla
-	var property tieneGluten = true
+class ObleaCrujiente inherits Oblea {
 	var mordiscos = 0
 	
-	method sabor() {
-		return sabor
-	}
-	
-	method recibeMordisco() {
+	override method recibeMordisco() {
 		if (peso > 70 and mordiscos < 3) {
 			peso = (peso * 0.5) - 3
 			mordiscos++
@@ -138,48 +112,30 @@ class ObleaCrujiente {
 }
 
 class Chocolatin {
-	var peso
-	const precio = peso * 0.50
-	const sabor = chocolate
+	var property peso
+	var property sabor = chocolate
 	var property tieneGluten = true
 	
 	method recibeMordisco() {
 		peso = peso - 2
 	}
-
-	method sabor() {
-		return sabor
-	}
 	
-	method peso() {
-		return peso
-	}
-	
-	method precio() {
-		return precio
+	method precio() { 
+		return peso * 0.50
 	}
 }
 
-class ChocolatinVIP {
-	var peso
-	const precio = peso * 0.50
-	const sabor = chocolate
-	var property tieneGluten = true
-	
-	method recibeMordisco() {
-		peso = peso - 2
-	}
+class ChocolatinVIP inherits Chocolatin {
+	var property humedad = 0.5
 
-	method sabor() {
-		return sabor
+	override method peso() {
+		return peso * (1 + humedad)
 	}
-	
-	method peso() {
-		return peso
-	}
-	
-	method precio() {
-		return precio
+}
+
+class ChocolatinPremium inherits ChocolatinVIP {
+	override method peso() {
+		return peso * (1 + (humedad / 2))
 	}
 }
 

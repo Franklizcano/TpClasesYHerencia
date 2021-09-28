@@ -42,9 +42,8 @@ describe "Test de Golosinas" {
 	}
 	
 	test "¿El peso de chocolatin cambia?" {
-		const chocolatin = new Chocolatin()
+		const chocolatin = new Chocolatin(peso = 100)
 		const bombon = new Bombon()
-		chocolatin.peso(100)
 		assert.equals(100, chocolatin.peso())
 		chocolatin.recibeMordisco()
 		bombon.recibeMordisco()
@@ -53,9 +52,8 @@ describe "Test de Golosinas" {
 	}
 	
 	test "¿A chocolatin se le asigno un precio?" {
-		const chocolatin = new Chocolatin()
-		chocolatin.peso(100)
-		assert.equals(50, chocolatin.precio())
+		const chocolatin = new Chocolatin(peso = 50)
+		assert.equals(25, chocolatin.precio())
 	}
 	
 	test "¿El baño de golosina modifica su peso?" {
@@ -127,6 +125,15 @@ describe "Test de Golosinas" {
 		oblea.recibeMordisco()
 		assert.equals(43.5, oblea.peso())
 		oblea.recibeMordisco()
-		assert.equals((43.5 * 0.7), oblea.peso())
+		assert.equals((43.5 * 0.75), oblea.peso())
+	}
+	
+	test "El peso de los chocolatines se calcula distinto" {
+		var chocolatin = new Chocolatin(peso = 10) 
+		assert.equals(10, chocolatin.peso()) 
+		chocolatin = new ChocolatinVIP(peso = 10) 
+		assert.equals(15, chocolatin.peso()) 
+		chocolatin = new ChocolatinPremium(peso = 10) 
+		assert.equals(12.5, chocolatin.peso())
 	}
 }
