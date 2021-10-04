@@ -99,14 +99,10 @@ class ObleaCrujiente inherits Oblea {
 	var mordiscos = 0
 	
 	override method recibeMordisco() {
-		if (peso > 70 and mordiscos < 3) {
-			peso = (peso * 0.5) - 3
+		super()
+		if (mordiscos < 3) {
+			peso = peso - 3
 			mordiscos++
-		} else if (mordiscos == 3) {
-			peso = (peso * 0.75) - 3
-			mordiscos++
-		} else {
-			peso = (peso * 0.75)
 		}
 	}
 }
@@ -135,7 +131,7 @@ class ChocolatinVIP inherits Chocolatin {
 
 class ChocolatinPremium inherits ChocolatinVIP {
 	override method peso() {
-		return peso * (1 + (humedad / 2))
+		return super() / 2
 	}
 }
 

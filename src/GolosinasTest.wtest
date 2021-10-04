@@ -134,6 +134,6 @@ describe "Test de Golosinas" {
 		chocolatin = new ChocolatinVIP(peso = 10) 
 		assert.equals(15, chocolatin.peso()) 
 		chocolatin = new ChocolatinPremium(peso = 10) 
-		assert.equals(12.5, chocolatin.peso())
+		assert.equals(7.5, chocolatin.peso())
 	}
 }
