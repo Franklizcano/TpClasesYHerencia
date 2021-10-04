@@ -111,7 +111,7 @@ describe "Test de Golosinas" {
 		assert.equals(chocolate, caramelo.sabor())
 	}
 	
-	test "La oblea crujiente en sus primeros 3 mordiscos pierde 5 gramos de peso adicional" {
+	test "La oblea crujiente en sus primeros 3 mordiscos pierde 3 gramos de peso adicional" {
 		var oblea = new Oblea() 
 		oblea.recibeMordisco()
 		oblea.recibeMordisco()
@@ -123,9 +123,9 @@ describe "Test de Golosinas" {
 		oblea.recibeMordisco()
 		oblea.recibeMordisco()
 		oblea.recibeMordisco()
-		assert.equals(43.5, oblea.peso())
+		assert.equals(40.5, oblea.peso())
 		oblea.recibeMordisco()
-		assert.equals((43.5 * 0.75), oblea.peso())
+		assert.equals((40.5 * 0.75), oblea.peso())
 	}
 	
 	test "El peso de los chocolatines se calcula distinto" {

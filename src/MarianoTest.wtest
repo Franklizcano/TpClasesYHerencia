@@ -56,7 +56,7 @@ describe "Test de Mariano" {
 	test "Mariano comprueba las golosinas que tiene de un sabor" {
 		const alfajor = new Alfajor()
 		mariano.comprar(alfajor)
-		const chocolatin = new Chocolatin()
+		const chocolatin = new Chocolatin(peso = 5)
 		mariano.comprar(chocolatin)
 		assert.equals([alfajor, chocolatin], mariano.golosinasDeSabor(chocolate))
 	}
@@ -64,7 +64,7 @@ describe "Test de Mariano" {
 	test "Mariano comprueba los sabores de las golosinas que compró" {
 		const alfajor = new Alfajor()
 		const chupetin = new Chupetin()
-		const chocolatin = new Chocolatin()
+		const chocolatin = new Chocolatin(peso = 5)
 		mariano.comprar(alfajor)
 		mariano.comprar(chupetin)
 		mariano.comprar(chocolatin)
@@ -74,7 +74,7 @@ describe "Test de Mariano" {
 	test "Mariano comprueba cual es la golosina más cara de su bolsa" {
 		const alfajor = new Alfajor()
 		const chupetin = new Chupetin()
-		const chocolatin = new Chocolatin()
+		const chocolatin = new Chocolatin(peso = 5)
 		const oblea = new Oblea()
 		mariano.comprar(alfajor)
 		mariano.comprar(chupetin)
